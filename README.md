@@ -100,8 +100,14 @@ Academic / archived. This was built as a final project for a college course and 
 - Justin Halvorson
 
 This was a three-person group project; see `LICENSE` for how that affects
-licensing. Based on the commit history, each person's main areas of work
-were roughly:
+licensing. **Daniel Leone's original-code contribution to this repository
+is limited to a specific bug fix and a small gameplay tweak** -- the core
+game (the initial Pygame implementation, the entity classes, the board
+layout, and the input-handling threading) was written by Ben Tran and
+Justin Halvorson. Daniel Leone's larger contribution to this repository is
+the documentation pass (this README, the LICENSE scoping, and the security
+review) added afterward, not the original coursework itself. Based on the
+commit history, each person's main areas of work were roughly:
 
 - **Ben Tran:** Wrote the initial working Pygame implementation in a single
   commit (`main.py`, `logic/game_logic.py`, `display/game_display.py`,

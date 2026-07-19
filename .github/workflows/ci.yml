@@ -1,0 +1,68 @@
+name: CI
+
+# Run on every push (all branches, no filter) and allow manual runs.
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # This project is a GUI game (Pygame) with no headless/non-interactive
+      # mode, and no automated test suite. There is nothing meaningful to
+      # "run" in CI beyond confirming the code is syntactically valid and
+      # (best-effort) that it initializes without crashing under a virtual
+      # display. See README.md "Project Structure" / "Known Issues" for the
+      # live-vs-dead-code breakdown this step relies on.
+
+      - name: Compile-check live code (main.py + logic/game_logic.py)
+        run: |
+          python -m py_compile main.py logic/__init__.py logic/game_logic.py
+
+      # config.py, entities.py, display/game_display.py, and
+      # logic/movement_logic.py are documented dead code (nothing imports
+      # them - see README.md Known Issues). They're not part of the running
+      # program, but compiling them too is harmless and just confirms they
+      # still parse as valid Python.
+      - name: Compile-check dead code (unused modules, syntax-only)
+        run: |
+          python -m py_compile config.py entities.py display/game_display.py logic/movement_logic.py
+
+      # Smoke test: main.py opens a Pygame window and runs a blocking game
+      # loop (Game.start in logic/game_logic.py) with no exit condition
+      # other than a QUIT/ESC event or an unhandled exception. It never
+      # waits on interactive/stdin input during setup - pygame.init(),
+      # window creation, and thread startup all happen unconditionally
+      # before the loop begins, and pygame.event.get() inside the loop is
+      # non-blocking. Using SDL_VIDEODRIVER=dummy lets Pygame initialize
+      # without a real display, and `timeout` kills the process after a
+      # few seconds since the game loop otherwise runs forever. Exit code
+      # 124 (timeout reached) is treated as success - it means the game
+      # started and ran without crashing. Any other non-zero exit means an
+      # actual error (e.g. an unhandled exception during init or the loop).
+      - name: Smoke test main.py under a virtual display
+        env:
+          SDL_VIDEODRIVER: dummy
+          SDL_AUDIODRIVER: dummy
+        run: |
+          timeout 5s python main.py; code=$?
+          if [ $code -ne 0 ] && [ $code -ne 124 ]; then
+            echo "main.py exited with unexpected code $code"
+            exit $code
+          fi
+          echo "Smoke test finished (exit code $code, 124 = timed out as expected)"

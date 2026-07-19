@@ -1,0 +1,41 @@
+Licensing Notice
+=================
+
+This repository is a multi-author group coursework project, originally built
+as a final project for CS 320 (Fall 2024). It contains contributions from
+three people: Ben Tran, Justin Halvorson, and Daniel Leone (see the
+"Contributors" section of README.md for details on what each person worked
+on).
+
+The MIT License below applies ONLY to the portions of this Software authored
+by Daniel Leone. The contributions of Ben Tran and Justin Halvorson are
+included in this repository for archival and portfolio purposes only. No
+permission has been obtained from Ben Tran or Justin Halvorson to license or
+relicense their work, and nothing in this file grants any license to their
+contributions. Anyone wishing to use, copy, modify, or distribute the
+portions of this Software authored by Ben Tran or Justin Halvorson must
+obtain permission directly from them.
+
+MIT License
+============
+
+Copyright (c) 2026 Daniel Leone
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of the portions of this Software authored by Daniel Leone (the "Licensed
+Contributions"), to deal in the Licensed Contributions without restriction,
+including without limitation the rights to use, copy, modify, merge,
+publish, distribute, sublicense, and/or sell copies of the Licensed
+Contributions, and to permit persons to whom the Licensed Contributions are
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Licensed Contributions.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
